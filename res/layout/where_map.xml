@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+              <!-- Production version com.google.android.maps.MapView
+                 android:id="@+id/whereMap"
+                 android:clickable="true"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:apiKey="0Mn9_G8_7-tkCyCbTutXnjxBcFAg442ZLq5Hb6A"
+                 />  -->
+              <com.google.android.maps.MapView
+                 android:id="@+id/whereMap"
+                 android:clickable="true"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:apiKey="0Mn9_G8_7-tkKk2rEEyw1x8Y7qxnRgFWN-F_eMQ"
+                 />
+</LinearLayout>

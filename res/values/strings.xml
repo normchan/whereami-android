@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, WhereAmI!</string>
+    <string name="app_name">Where Am I?</string>
+    <string name="whereButtonDisplay">Show Me</string>
+    <string name="clearButtonDisplay">Clear</string>
+    <string name="latitudeLabel">Latitude: </string>
+    <string name="longitudeLabel">Longitude: </string>
+    <string name="altitudeLabel">Altitude: </string>
+    <string name="bearingLabel">Bearing: </string>
+    <string name="speedLabel">Speed: </string>
+    <string name="timeLabel">Last Updated: </string>
+    <string name="degreeMinUnit">Deg:Min</string>
+    <string name="bearingUnit">Deg E of N</string>
+    <string name="altitudeUnit">m</string>
+    <string name="speedUnit">MPH</string>
+    <string name="gpsCheckboxDisplay">Use GPS</string>
+</resources>
