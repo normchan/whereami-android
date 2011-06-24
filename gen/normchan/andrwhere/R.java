@@ -21,8 +21,10 @@ public final class R {
         public static final int OfferProgressBar=0x7f060020;
         public static final int RelativeLayout01=0x7f06001c;
         public static final int altitudeField=0x7f060013;
+        public static final int balanceItem=0x7f060024;
         public static final int bearingField=0x7f060016;
         public static final int clearButton=0x7f060006;
+        public static final int earnItem=0x7f060025;
         public static final int geocoderStatusView=0x7f06001a;
         public static final int gpsCheckbox=0x7f060003;
         public static final int latitudeField=0x7f06000c;

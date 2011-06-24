@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/showAltItem" android:enabled="false" android:title="Show Alternate Locations"></item>
     <item android:title="Map It!" android:enabled="false" android:id="@+id/mapItItem"></item>
-    <!--  item android:enabled="true" android:title="Supernova Balance" android:id="@+id/balanceItem"></item -->
-	<!-- item android:title="Earn Supernovas" android:enabled="true" android:id="@+id/earnItem"></item -->
+    <item android:enabled="true" android:title="Supernova Balance" android:id="@+id/balanceItem"></item>
+	<item android:title="Earn Supernovas" android:enabled="true" android:id="@+id/earnItem"></item>
 </menu>

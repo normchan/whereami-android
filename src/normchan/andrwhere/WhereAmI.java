@@ -1,7 +1,10 @@
 package normchan.andrwhere;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -36,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tapjoy.TapjoyConnect;
+import com.tapjoy.TapjoyLog;
 import com.tapjoy.TapjoyNotifier;
 
 public class WhereAmI extends Activity {
@@ -89,16 +93,27 @@ public class WhereAmI extends Activity {
     }
     
     private void detectStoreOrigin() {
-    	Log.d(TAG, "Attempting to detect origin app store...");
+    	TapjoyLog.d(TAG, "Attempting to detect origin app store...");
     	String origin = null;
-		try {
-			InputStream stream = this.getAssets().open("tapjoy.dat", AssetManager.ACCESS_BUFFER);
-			byte[] bytes = new byte[30];
-			stream.read(bytes, 0, 30);
-			origin = new String(bytes);
+    	InputStream stream = null;
+    	BufferedReader reader = null;
+    	try {
+			stream = this.getAssets().open("tapjoy.dat", AssetManager.ACCESS_BUFFER);
+			reader = new BufferedReader(new InputStreamReader(stream));
+			origin = reader.readLine();
+		} catch (FileNotFoundException e) {
+			TapjoyLog.i(TAG, "tapjoy.dat file not found.");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			Log.i(TAG, "Caught exception while attempting to detect origin app store", e);
+			TapjoyLog.e(TAG, "Caught exception while reading asset file: "+e.getMessage());
+		} finally {
+			try {
+				if (reader != null)
+					reader.close();
+				if (stream != null)
+					stream.close();
+			} catch (IOException e) {
+				TapjoyLog.e(TAG, "Caught exception while closing asset file InputStream: "+e.getMessage());
+			}
 		}
 
 		String displayText = "Unknown origin app store";
@@ -159,30 +174,30 @@ public class WhereAmI extends Activity {
     		alert.show();
     		break;
 
-//    	case R.id.balanceItem:
-//    		TapjoyConnect.getTapjoyConnectInstance().getTapPoints(new TapjoyNotifier() {
-//
-//				@Override
-//				public void getUpdatePoints(String currencyName, int pointTotal) {
-//					Log.d(TAG, "Current point balance: "+pointTotal);
-//    		    	WhereAmI.this.statusStr = "Current point balance: "+pointTotal;
-//    		    	mHandler.post(mUpdateResults);
-//				}
-//
-//				@Override
-//				public void getUpdatePointsFailed(String error) {
-//					Log.d(TAG, "Failed to get point balance from server.");
-//    		    	WhereAmI.this.statusStr = "Failed to get point balance from server.";
-//    		    	mHandler.post(mUpdateResults);
-//				}
-//    			
-//    		});
-//    		break;
-//    		
-//    	case R.id.earnItem:
-//			Log.d(TAG, "Showing offer wall...");
-//    		TapjoyConnect.getTapjoyConnectInstance().showOffers();
-//    		break;
+    	case R.id.balanceItem:
+    		TapjoyConnect.getTapjoyConnectInstance().getTapPoints(new TapjoyNotifier() {
+
+				@Override
+				public void getUpdatePoints(String currencyName, int pointTotal) {
+					Log.d(TAG, "Current point balance: "+pointTotal);
+    		    	WhereAmI.this.statusStr = "Current point balance: "+pointTotal;
+    		    	mHandler.post(mUpdateResults);
+				}
+
+				@Override
+				public void getUpdatePointsFailed(String error) {
+					Log.d(TAG, "Failed to get point balance from server.");
+    		    	WhereAmI.this.statusStr = "Failed to get point balance from server.";
+    		    	mHandler.post(mUpdateResults);
+				}
+    			
+    		});
+    		break;
+    		
+    	case R.id.earnItem:
+			Log.d(TAG, "Showing offer wall...");
+    		TapjoyConnect.getTapjoyConnectInstance().showOffers();
+    		break;
     	}
     	
 
