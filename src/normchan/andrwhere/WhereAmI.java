@@ -89,10 +89,25 @@ public class WhereAmI extends Activity {
 
         this.statusTV = (TextView)findViewById(R.id.geocoderStatusView);
         updateResultsInUi();
-        detectStoreOrigin();
+        displayStoreOrigin();
     }
     
-    private void detectStoreOrigin() {
+    private void displayStoreOrigin() {
+    	String origin = getStoreOrigin();
+		String displayText = "Unknown origin app store";
+		if (origin != null) {
+			if (origin.equals(ANDROID_MARKET_STORE_ORIGIN))  {
+				displayText = "From Android Market";
+			} else if (origin.equals(AMAZON_APP_STORE_ORIGIN)) {
+				displayText = "From Amazon App Store";
+			} else if (origin.equals(GETJAR_APP_STORE_ORIGIN)) {
+				displayText = "From GetJar App Store";
+			}
+		}
+		((TextView)findViewById(R.id.storeOriginView)).setText(displayText);
+    }
+    
+    private String getStoreOrigin() {
     	TapjoyLog.d(TAG, "Attempting to detect origin app store...");
     	String origin = null;
     	InputStream stream = null;
@@ -116,17 +131,7 @@ public class WhereAmI extends Activity {
 			}
 		}
 
-		String displayText = "Unknown origin app store";
-		if (origin != null) {
-			if (origin.equals(ANDROID_MARKET_STORE_ORIGIN))  {
-				displayText = "From Android Market";
-			} else if (origin.equals(AMAZON_APP_STORE_ORIGIN)) {
-				displayText = "From Amazon App Store";
-			} else if (origin.equals(GETJAR_APP_STORE_ORIGIN)) {
-				displayText = "From GetJar App Store";
-			}
-		}
-		((TextView)findViewById(R.id.storeOriginView)).setText(displayText);
+		return origin;
     }
     
     @Override
